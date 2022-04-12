@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.mapper.BookDao">
+
+    <select id="selectBookById" resultType="com.bjpowernode.entity.Book">
+        select * from book
+        <where>
+                bookid = #{stusId}
+        </where>
+    </select>
+
+    <delete id="deleteBookById" parameterType="integer">
+        delete from book where bookid = #{stuId}
+    </delete>
+
+    <update id="updateBook">
+        update book <set>
+            <if test="bbookname != null">
+                bookname = #{bbookname},
+            </if>
+            <if test="bbooklink != null">
+                booklink = #{bbooklink},
+            </if>
+            <if test="bauthor != null">
+                author = #{bauthor},
+            </if>
+            <if test="bcategoryid != null">
+                categoryid = #{bcategoryid},
+            </if>
+            <if test="bprice != null">
+                price = #{bprice},
+            </if>
+            <if test="bpublish != null">
+                publish  = #{bpublish},
+            </if>
+            <if test="bdeadline != null">
+                deadline = #{bdeadline}
+            </if>
+            <if test="bbookid">
+                bookid = #{bbookid}
+            </if>
+        </set>
+        <where>
+            bookid = #{bbookid}
+        </where>
+    </update>
+
+    <insert id="insertBook">
+        insert into book values (#{bookid},#{bookname},#{author},#{publish},#{categoryid},#{booklink},#{price},#{deadline})
+    </insert>
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+         <mapper namespace="com.bjpowernode.mapper.UserDao">
+<!--    <resultMap id="Borrow" type="com.bjpowernode.entity.User">-->
+<!--        <id property="userid" column="userid"></id>-->
+<!--        <result property="username" column="username"></result>-->
+<!--        <result property="password" column="password"></result>-->
+<!--        <result property="email" column="email"></result>-->
+<!--        <result property="phone" column="phone"></result>-->
+<!--        <association property="bookBorrow" javaType="com.bjpowernode.entity.BookBorrow">-->
+<!--            <id property="id" column="id"></id>-->
+<!--            <result column="u_id" property="u_id"></result>-->
+<!--            <result column="b_id" property="b_id"></result>-->
+<!--            <result column="booklink" property="booklink"></result>-->
+<!--            <result column="bookname" property="bookname"></result>-->
+<!--            <result column="borrowtime" property="borrowtime"></result>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+    <insert id="insertUser">
+        insert into user values
+      (#{userid},#{username},#{password},#{email},#{phone})
+    </insert>
+    <select id="selectUserById"  resultType="com.bjpowernode.entity.User">
+        select * from user
+        <where>
+                userid = #{stusId}
+        </where>
+    </select>
+<!--    <select id="selectBorrowById" resultMap="Borrow" resultType="com.bjpowernode.entity.User">-->
+<!--        select username,borrotime from user inner join bookborrow-->
+<!--        on user.userid = bookborrow.id where bookborrow.id = #{stuId}-->
+<!--    </select>-->
+    <delete id="deleteUserById" parameterType="integer">
+        delete from user
+        <where>
+            userid = #{studId1}
+        </where>
+    </delete>
+
+    <update id="updateUser">
+        update user
+        <set>
+            <if test="username != null">
+                username = #{uusername},
+            </if>
+            <if test="password != null">
+                password = #{upassword},
+            </if>
+            <if test="email != null">
+                email = #{uemail},
+            </if>
+            <if test="phone != null">
+                phone = #{uphone},
+            </if>
+            <where>
+                    userid = #{uid}
+            </where>
+        </set>
+    </update>
+
+
+</mapper>
